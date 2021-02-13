@@ -10,7 +10,8 @@ DB_NAME="${POSTGRES_DB:=cms}"
 # Check if a custom port has been set, otherwise default to '5432'
 DB_PORT="${POSTGRES_PORT:=5432}"
 
-# Launch postgres using Docker
+if [[ -z "${SKIP_DOCKER}" ]]
+then
 docker run \
   -e POSTGRES_USER=${DB_USER} \
   -e POSTGRES_PASSWORD=${DB_PASSWORD} \
@@ -18,6 +19,7 @@ docker run \
   -p "${DB_PORT}":5432 \
   -d postgres \
   postgres -N 1000
+fi
 
 until PGPASSWORD="${DB_PASSWORD}" psql -h "localhost" -U "${DB_USER}" -p "${DB_PORT}" -d "postgres" -c '\q'; do
   >&2 echo "Postgres is still unavailable - sleeping"
