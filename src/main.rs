@@ -1,5 +1,4 @@
-mod database;
-use database::connect_sql;
+use cms_actix::test;
 use actix_files::{NamedFile};
 use actix_web::{web, App, HttpServer, Result, HttpResponse, Responder, Error};
 use actix_web::http::StatusCode;
@@ -23,8 +22,7 @@ pub async fn index() -> Result<HttpResponse, Error> {
 
 #[actix_web::main]
 async fn main() -> Result<(), std::io::Error> {
-    let pool = connect_sql();
-
+    let _ = test().await;
     
     
     println!("Listening on port 8080");

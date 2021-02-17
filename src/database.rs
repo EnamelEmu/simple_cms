@@ -21,22 +21,25 @@ pub async fn connect_sql() -> Result<sqlx::PgPool, sqlx::Error> {
 }
 
 pub async fn create_post (pool: &PgPool, post: Post) -> Result<Uuid, sqlx::Error> {
-    let rec =
+    let query =
 	sqlx::query!(
 	    r#"
-INSERT INTO posts ( title, content )
-VALUES ( $1, $2 )
-RETURNING id"#, post.title, post.content
-	).fetch_one(pool)
-	.await?;
+INSERT INTO posts ( id, title, content )
+VALUES ( $1, $2, $3 )
+RETURNING id"#, post.uuid_id, post.title, post.content
+	).fetch_one(pool).await?;
     
-    Ok(rec.id)
+    Ok(query.id)
 }
 
-pub async fn delete_post () {
-    todo!()
+pub async fn delete_post (pool: &PgPool, id: Uuid) -> Result<(), sqlx::Error> {
+    let query =
+	sqlx::query!(
+	    r#"
+DELETE FROM posts WHERE id = $1"#, id).fetch_one(pool).await?;
+    Ok(())
 }
 
-pub async fn update_post () {
+pub async fn update_post (pool: &PgPool, id: Uuid) {
     todo!()
 }
