@@ -40,6 +40,12 @@ DELETE FROM posts WHERE id = $1"#, id).fetch_one(pool).await?;
     Ok(())
 }
 
-pub async fn update_post (pool: &PgPool, id: Uuid) {
-    todo!()
+pub async fn update_post (pool: &PgPool, post: Post) -> Result<(), sqlx::Error> {
+    let query =
+	sqlx::query!(
+	    r#"
+UPDATE posts
+SET title = $1, content = $2
+WHERE id = $3"#, post.title, post.content, post.id).fetch_one(pool).await?;
+    Ok(())
 }
