@@ -46,6 +46,6 @@ pub async fn update_post (pool: &PgPool, post: Post) -> Result<(), sqlx::Error> 
 	    r#"
 UPDATE posts
 SET title = $1, content = $2
-WHERE id = $3"#, post.title, post.content, post.id).fetch_one(pool).await?;
+WHERE id = $3"#, post.title, post.content, post.uuid_id).fetch_one(pool).await?;
     Ok(())
 }
