@@ -49,3 +49,14 @@ SET title = $1, content = $2
 WHERE id = $3"#, post.title, post.content, post.uuid_id).fetch_one(pool).await?;
     Ok(())
 }
+
+pub async fn read_post(pool: &PgPool, title: String) -> Result<(), sqlx::Error> {
+    let query =
+	sqlx::query!(
+	    r#"
+SELECT title
+FROM posts
+WHERE title = $1
+	"#,title).fetch_one(pool).await?;
+    Ok(())
+}

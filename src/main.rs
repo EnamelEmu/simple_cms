@@ -1,7 +1,11 @@
+mod database;
+use uuid::Uuid;
 use actix_files::{NamedFile};
+use cms_actix::create_test_post;
 use actix_web::{web, App, HttpServer, Result, HttpResponse, Responder, Error};
 use actix_web::http::StatusCode;
 use std::error;
+use database::{Post, create_post, connect_sql};
 
 // async fn index() -> Result<HttpResponse> {
 //     Ok(HttpResponse::Ok().json(
@@ -22,10 +26,5 @@ pub async fn index() -> Result<HttpResponse, Error> {
 #[actix_web::main]
 async fn main() -> Result<(), std::io::Error> {
     println!("Listening on port 8080");
-    HttpServer::new(|| {
-	App::new().route("/", web::get().to(index))
-    })
-	.bind("127.0.0.1:8080")?
-	.run()
-	.await
+    Ok(())
 }
