@@ -1,4 +1,5 @@
 use serde::{Serialize, Deserialize};
+use serde_json::json;
 use time::{Date, Time};
 use sqlx::postgres::PgPoolOptions;
 use sqlx::postgres;
@@ -50,13 +51,12 @@ WHERE id = $3"#, post.title, post.content, post.uuid_id).fetch_one(pool).await?;
     Ok(())
 }
 
-pub async fn read_post(pool: &PgPool, title: String) -> Result<(), sqlx::Error> {
+pub async fn read_post(pool: &PgPool, title: String) -> Result<String, sqlx::Error> {
     let query =
 	sqlx::query!(
 	    r#"
-SELECT title
-FROM posts
-WHERE title = $1
+SELECT * from posts where title = $1
 	"#,title).fetch_one(pool).await?;
-    Ok(())
+
+    Ok(query.content)
 }
