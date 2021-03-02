@@ -1,8 +1,8 @@
-mod database;
+pub mod database;
 use serde::Serialize;
 use uuid::Uuid;
 use typed_html::{dom::*, text, html};
-use database::{connect_sql, Post, delete_post, create_post};
+pub use database::{Post, connect_sql, delete_post, create_post};
 
 
 pub async fn create_test_post(payload: Post) {
@@ -12,7 +12,7 @@ pub async fn create_test_post(payload: Post) {
 
 }
 
-pub fn render_post (post: &Post) -> std::string::String {
+pub fn render_post (post: Post) -> Result<std::string::String, std::io::Error> {
     let mut dom: DOMTree<String> =
 	html!(
 	    <div id="post">
