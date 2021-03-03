@@ -22,17 +22,15 @@ pub async fn index() -> Result<HttpResponse, Error> {
 
 #[actix_web::main]
 async fn main() -> Result<(), std::io::Error> {
-    let post_test = Post {
-	uuid_id: Uuid::new_v4(),
-	title: String::from("Title :D"),
-	content: String::from("CONTENT"),
-    };
-    
+
     println!("Listening on port 8080");
-    println!("{:#?}", render_post(Post {
-	uuid_id: Uuid::new_v4(),
-	title: String::from("Title :D"),
-	content: String::from("CONTENT"),
-    }));
+    println!("{:#?}",
+	     render_post(Post {
+		 uuid_id: Uuid::new_v4(),
+		 title: String::from("Title :D"),
+		 content: String::from("CONTENT"),
+	     }
+	     ).to_string()
+    );
     Ok(())
 }
