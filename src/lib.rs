@@ -31,16 +31,19 @@ pub fn render_post (post: Post) -> DOMTree<std::string::String> {
         
 }
 
-pub fn render_head() -> Box<dyn MetadataContent<String>> {
-	html! {
-	    <meta charset="UTF-8" />: String
-	}
+pub fn render_head() -> Vec<Box<dyn MetadataContent<String>>> {
+    vec![
+	html!(<meta charset="UTF-8" />),
+	html!(<link rel="stylesheet" href="https://unpkg.com/chota@latest" />),
+	]
 }
 
-pub fn render_navbar() -> Box<div<String>> {
-	html!{
-	    <div id="navbar" >
-		<a href="/">"Home"</a>
-		</div>
-	}
+pub fn render_navbar() -> Box<nav<String>> {
+    html!{
+	<nav class="nav">
+	    <div id="nav-left" >
+	    <a href="/">"Home"</a>
+	    </div>
+	    </nav>
+    }
 }
