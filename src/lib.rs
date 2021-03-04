@@ -53,3 +53,7 @@ pub fn render_navbar() -> Box<nav<String>> {
 	    </nav>
     }
 }
+
+pub fn save_post() {
+    todo!();
+}
