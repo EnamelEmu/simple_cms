@@ -14,20 +14,20 @@ pub async fn create_test_post(payload: Post) {
 }
 
 pub fn render_post (post: Post) -> DOMTree<std::string::String> {
-	html!(
-	    <html>
-		<head>
-		<title>{text!("{}", post.title)}</title>
-	    { render_head() }
-	    </head>
-		<body>
+    html!(
+	<html>
+	    <head>
+	    <title>{text!("{}", post.title)}</title>
+	{ render_head() }
+	</head>
+	    <body>
 	    <div id="post">
-		<h1>{text!("{}", post.title)}</h1>
-		<h3>{text!("{}", post.content)}</h3>
-		</div>
-		</body>
-		</html>
-	)
+	    <h1>{text!("{}", post.title)}</h1>
+	    <h3>{text!("{}", post.content)}</h3>
+	    </div>
+	    </body>
+	    </html>
+    )
         
 }
 
@@ -35,7 +35,7 @@ pub fn render_head() -> Vec<Box<dyn MetadataContent<String>>> {
     vec![
 	html!(<meta charset="UTF-8" />),
 	html!(<link rel="stylesheet" href="https://unpkg.com/chota@latest" />),
-	]
+    ]
 }
 
 pub fn render_navbar() -> Box<nav<String>> {
@@ -43,6 +43,12 @@ pub fn render_navbar() -> Box<nav<String>> {
 	<nav class="nav">
 	    <div id="nav-left" >
 	    <a href="/">"Home"</a>
+	    </div>
+
+	    <div class="nav-center">
+	    <a href="/">
+	    <img src="./assets/drawing.svg" />
+	    </a>
 	    </div>
 	    </nav>
     }
