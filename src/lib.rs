@@ -47,7 +47,7 @@ pub fn render_navbar() -> Box<nav<String>> {
 
 	    <div class="nav-center">
 	    <a href="/">
-	    <img src="./assets/drawing.svg" />
+	    <img src="/assets/drawing.svg" />
 	    </a>
 	    </div>
 	    </nav>
