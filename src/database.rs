@@ -14,6 +14,16 @@ pub struct Post {
     pub content: String,
 }
 
+impl Post {
+    pub fn new(title: String, content: String) -> Self {
+	Self {
+	    uuid_id: Uuid::new_v4(),
+	    title,
+	    content,
+	}
+    }
+}
+
 pub async fn connect_sql() -> Result<sqlx::PgPool, sqlx::Error> {
     return Ok(PgPoolOptions::new()
 	.max_connections(5)

@@ -3,6 +3,8 @@ use serde::Serialize;
 use uuid::Uuid;
 use typed_html::{dom::*, text, html, elements::*};
 pub use database::{Post, connect_sql, delete_post, create_post};
+use std::fs::{read, File};
+use std::path::Path;
 
 
 
@@ -54,6 +56,6 @@ pub fn render_navbar() -> Box<nav<String>> {
     }
 }
 
-pub fn save_post() {
-    todo!();
-}
+// pub fn save_post(path: Path, post_html: DOMTree<String>) -> Result<()> {
+//     fs::write(path, post_html.to_string())?;
+// }
