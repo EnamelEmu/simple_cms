@@ -55,5 +55,5 @@ pub fn render_navbar() -> Box<nav<String>> {
 }
 
 pub fn save_post() {
-    todo!();
+    ciao
 }
