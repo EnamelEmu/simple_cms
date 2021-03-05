@@ -5,8 +5,9 @@ use typed_html::{dom::*, text, html, elements::*};
 pub use database::{Post, connect_sql, delete_post, create_post};
 use std::fs::{read, File};
 use std::path::Path;
-
-
+use std::env::temp_dir;
+use std::io::Read;
+use std::process::Command;
 
 pub async fn create_test_post(payload: Post) {
 
@@ -59,3 +60,17 @@ pub fn render_navbar() -> Box<nav<String>> {
 // pub fn save_post(path: Path, post_html: DOMTree<String>) -> Result<()> {
 //     fs::write(path, post_html.to_string())?;
 // }
+
+pub fn input_from_erditor() -> Result<String, std::io::Error> {
+    let editor = var("EDITOR").unwrap();
+    let mut file_path = temp_dir();
+    file_path.push("temp_post");
+    File::create(&file_path).expect("err");
+
+    Command::new(editor).arg(&file_path).status().expect();
+
+    let mut content = String::new();
+    File::open(file_path).expect("err").read_to_string(&mut content);
+
+    return content;
+}
